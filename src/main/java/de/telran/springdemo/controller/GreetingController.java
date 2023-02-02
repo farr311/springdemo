@@ -3,46 +3,33 @@ package de.telran.springdemo.controller;
 import de.telran.springdemo.model.Greeting;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @SuppressWarnings("unused")
 public class GreetingController {
     //POST GET PUT PATCH DELETE
 
-    @PostMapping("/creategreeting")
-    public boolean createGreeting(@RequestBody Greeting greeting) {
-        System.out.println(greeting);
-        return true;
+    private static final List<Greeting> list = new ArrayList<>();
+
+    @PostMapping("/greet")
+    public int createGreeting(@RequestBody Greeting greeting) {
+        list.add(greeting);
+        return list.size() - 1;
     }
 
-    @GetMapping("/greeteveryone")
-    public String greet() {
-        return "Hello world";
+    @GetMapping("/greet/{id}")
+    public String greet(@PathVariable int id) {
+        Greeting g = list.get(id);
+        return ("Hello  " + g.getValue() + "").repeat(g.getCount());
     }
 
-    @GetMapping("/greetsomeone/{val}") // .../greetsomeone/world
-    public String greetSomeone1(@PathVariable("val") String value) {
-        return "Hello " + value.repeat(2);
-    }
+    @PatchMapping("/greet/{id}")
+    public void modifyGreeting(
+            @PathVariable int id,
+            @RequestParam int count) {
 
-    @GetMapping("/greetsomeone/{val1}/{val2}") // .../greetsomeone/world
-    public String doubleGreet(
-            @PathVariable("val1") String value1,
-            @PathVariable("val2") String value2) {
-        return "Hello " + value1 + " " + value2;
-    }
-
-    @GetMapping("/greetsomeone/{val1}/{val2}/params") // .../greetsomeone/world/test/params?count=5
-    public String doubleGreetWithParams(
-            @PathVariable("val1") String value1,
-            @PathVariable("val2") String value2,
-            @RequestParam("count") int count) {
-        return ("Hello " + value1 + " " + value2 + "<br>").repeat(count);
-    }
-
-    //users/public/documents/page.html
-
-    @GetMapping("/greetsomeone") // .../greetsomeone?val=...
-    public String greetSomeone2(@RequestParam("val") String value) {
-        return "REQUEST PARAM: Hello " + value;
+        list.get(id).setCount(count);
     }
 }
