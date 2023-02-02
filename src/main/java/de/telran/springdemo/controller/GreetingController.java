@@ -13,7 +13,7 @@ public class GreetingController {
 
     private static final List<Greeting> list = new ArrayList<>();
 
-    @PostMapping("/greet")
+    @RequestMapping(method = RequestMethod.POST, path = "/greet")
     public int createGreeting(@RequestBody Greeting greeting) {
         list.add(greeting);
         return list.size() - 1;
