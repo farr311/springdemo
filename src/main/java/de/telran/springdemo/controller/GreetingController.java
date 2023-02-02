@@ -1,11 +1,18 @@
 package de.telran.springdemo.controller;
 
+import de.telran.springdemo.model.Greeting;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @SuppressWarnings("unused")
 public class GreetingController {
     //POST GET PUT PATCH DELETE
+
+    @PostMapping("/creategreeting")
+    public boolean createGreeting(@RequestBody Greeting greeting) {
+        System.out.println(greeting);
+        return true;
+    }
 
     @GetMapping("/greeteveryone")
     public String greet() {
@@ -24,7 +31,7 @@ public class GreetingController {
         return "Hello " + value1 + " " + value2;
     }
 
-    @GetMapping("/greetsomeone/{val1}/{val2}/params") // .../greetsomeone/world
+    @GetMapping("/greetsomeone/{val1}/{val2}/params") // .../greetsomeone/world/test/params?count=5
     public String doubleGreetWithParams(
             @PathVariable("val1") String value1,
             @PathVariable("val2") String value2,
