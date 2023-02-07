@@ -1,35 +1,28 @@
 package de.telran.springdemo.controller;
 
 import de.telran.springdemo.model.Greeting;
+import de.telran.springdemo.service.GreetingService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 @SuppressWarnings("unused")
 public class GreetingController {
-    //POST GET PUT PATCH DELETE
-
-    private static final List<Greeting> list = new ArrayList<>();
+    @Autowired
+    private GreetingService service;
 
     @RequestMapping(method = RequestMethod.POST, path = "/greet")
     public int createGreeting(@RequestBody Greeting greeting) {
-        list.add(greeting);
-        return list.size() - 1;
+        return service.create(greeting);
     }
 
     @GetMapping("/greet/{id}")
-    public String greet(@PathVariable int id) {
-        Greeting g = list.get(id);
-        return ("Hello  " + g.getValue() + "").repeat(g.getCount());
+    public String getGreeting(@PathVariable int id) {
+        return service.get(id);
     }
 
     @PatchMapping("/greet/{id}")
-    public void modifyGreeting(
-            @PathVariable int id,
-            @RequestParam int count) {
-
-        list.get(id).setCount(count);
+    public void modifyGreeting(@PathVariable int id, @RequestParam int count) {
+        service.update(id, count);
     }
 }
