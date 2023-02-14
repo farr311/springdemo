@@ -2,7 +2,10 @@ package de.telran.springdemo.controller;
 
 import de.telran.springdemo.model.Greeting;
 import de.telran.springdemo.service.GreetingService;
+import de.telran.springdemo.service.GreetingServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,8 +20,14 @@ public class GreetingController {
     }
 
     @GetMapping("/greet/{id}")
-    public String getGreeting(@PathVariable int id) {
-        return service.get(id);
+    public ResponseEntity<String> getGreeting(@PathVariable int id) {
+        try {
+            return new ResponseEntity<>(service.get(id), HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @PatchMapping("/greet/{id}")

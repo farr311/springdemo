@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@SuppressWarnings("unused")
 public class GreetingServiceImpl implements GreetingService {
     private static final List<Greeting> list = new ArrayList<>();
 
