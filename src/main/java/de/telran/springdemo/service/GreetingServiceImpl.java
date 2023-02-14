@@ -17,9 +17,8 @@ public class GreetingServiceImpl implements GreetingService {
         return list.size() - 1;
     }
 
-    public String get(int id) {
-        Greeting g = list.get(id);
-        return ("Hello  " + g.getValue() + "").repeat(g.getCount());
+    public Greeting get(long id) {
+        return list.get((int) id);
     }
 
     public void update(int id, int count) {

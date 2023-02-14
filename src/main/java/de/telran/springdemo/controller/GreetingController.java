@@ -20,7 +20,7 @@ public class GreetingController {
     }
 
     @GetMapping("/greet/{id}")
-    public ResponseEntity<String> getGreeting(@PathVariable int id) {
+    public ResponseEntity<Greeting> getGreeting(@PathVariable long id) {
         try {
             return new ResponseEntity<>(service.get(id), HttpStatus.OK);
         } catch (IllegalArgumentException e) {
