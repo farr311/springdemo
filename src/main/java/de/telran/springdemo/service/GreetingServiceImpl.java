@@ -3,7 +3,6 @@ package de.telran.springdemo.service;
 import de.telran.springdemo.model.Greeting;
 import de.telran.springdemo.repository.GreetingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 
