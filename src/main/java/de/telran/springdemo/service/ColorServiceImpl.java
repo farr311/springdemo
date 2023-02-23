@@ -1,6 +1,8 @@
 package de.telran.springdemo.service;
 
 import de.telran.springdemo.entity.Color;
+import de.telran.springdemo.entity.Counter;
+import de.telran.springdemo.entity.RgbaValue;
 import de.telran.springdemo.repository.ColorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,9 +13,15 @@ public class ColorServiceImpl implements ColorService {
 
     @Autowired
     ColorRepository repository;
+
+    @Autowired
+    RgbaValueService rgbaValueService;
+
     @Override
     public long createOrGet(Color color) {
-        // TODO: сохранить RgbaValue из данного color в репозитории через RgbaValueService
+        long rgbaValueId = rgbaValueService.createOrGet(color.getRgbaValue());
+        RgbaValue rgbaValue = rgbaValueService.get(rgbaValueId);
+        color.setRgbaValue(rgbaValue);
 
         return repository.save(color).getId();
     }

@@ -7,7 +7,15 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Entity
-@Table(name = "color")
+@Table(
+        name = "color",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        columnNames = {
+                                "hex_value",
+                                "rgba_value_id"
+                        })
+        })
 @AllArgsConstructor
 @NoArgsConstructor
 @RequiredArgsConstructor

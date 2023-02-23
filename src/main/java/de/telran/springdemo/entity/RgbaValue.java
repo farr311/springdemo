@@ -8,7 +8,17 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "rgba_value")
+@Table(
+        name = "rgba_value",
+        uniqueConstraints = {
+                @UniqueConstraint(
+                        columnNames = {
+                                "value_r",
+                                "value_g",
+                                "value_b",
+                                "value_a"
+                        })
+        })
 @AllArgsConstructor
 @NoArgsConstructor
 @RequiredArgsConstructor
