@@ -44,13 +44,13 @@ public class GreetingServiceTest {
             when(repository.save(any(Greeting.class)))
                     .thenAnswer(i -> a);
 
-            var count = g.getCount();
+            var count = g.getCounter();
             var value = g.getValue();
             var b = service.create(g);
 
             assertAll(
                     () -> assertEquals(a, b),
-                    () -> assertEquals(count, g.getCount()),
+                    () -> assertEquals(count, g.getCounter()),
                     () -> assertEquals(value, g.getValue())
             );
         }
@@ -73,7 +73,7 @@ public class GreetingServiceTest {
 
             assertAll(
                     () -> assertEquals(a, b.getId()),
-                    () -> assertEquals(count, b.getCount()),
+                    () -> assertEquals(count, b.getCounter()),
                     () -> assertEquals(value, b.getValue())
             );
         }
