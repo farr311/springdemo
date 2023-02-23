@@ -32,4 +32,10 @@ public class Greeting {
 
     private Color color;
 
+    /*
+    * TODO: проставить JPA аннотации и аннотации javax.validation в классах Color и RgbaValue
+    *  Реализовать контроллер для класса Color (для RgbaValue контроллер НЕ НУЖЕН)
+    *  Реализовать сервисы и репозитории для обоих классов
+    *  Связать эти сущности друг с другом и с сущностью Greeting
+    * */
 }

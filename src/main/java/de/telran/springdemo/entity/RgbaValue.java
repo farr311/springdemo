@@ -4,11 +4,11 @@ public class RgbaValue {
 
     private Long id;
 
-    private Integer r;
+    private Integer r;  //целое число от 0 до 255
 
-    private Integer g;
+    private Integer g;  //целое число от 0 до 255
 
-    private Integer b;
+    private Integer b;  //целое число от 0 до 255
 
-    private Integer a;
+    private Integer a;  //целое число от 0 до 255
 }
