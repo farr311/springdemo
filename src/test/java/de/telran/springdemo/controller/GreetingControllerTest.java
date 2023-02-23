@@ -1,7 +1,7 @@
 package de.telran.springdemo.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import de.telran.springdemo.model.Greeting;
+import de.telran.springdemo.entity.Greeting;
 import de.telran.springdemo.service.GreetingService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
