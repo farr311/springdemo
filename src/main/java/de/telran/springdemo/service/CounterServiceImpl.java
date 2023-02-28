@@ -5,8 +5,10 @@ import de.telran.springdemo.repository.CountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.validation.*;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Service
 @SuppressWarnings("unused")
@@ -15,14 +17,24 @@ public class CounterServiceImpl implements CounterService {
     @Autowired
     CountRepository repository;
 
+   /* @Autowired
+    Validator validator;*/
+
+    ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+    Validator validator = factory.getValidator();
+
     @Override
     public long createOrGet(Counter counter) {
+        Set<ConstraintViolation<Counter>> violations = validator.validate(counter);
+
+        if (!violations.isEmpty()) {
+            throw new ConstraintViolationException(violations);
+        }
+
         if (!existsWithGivenValue(counter.getCount())) {
-            System.out.println("DOES NOT EXIST");
             return repository.save(counter).getId();
         }
 
-        System.out.println("EXISTS");
         List<Counter> list = repository.findByCount(counter.getCount());
         return Objects.requireNonNull(list.get(0)).getId();
     }

@@ -14,7 +14,6 @@ import javax.validation.constraints.NotNull;
 @RequiredArgsConstructor
 @Getter
 @Setter
-@ToString
 public class Greeting {
 
     @Id

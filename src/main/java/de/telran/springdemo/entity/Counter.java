@@ -23,7 +23,6 @@ public class Counter {
 
     @Min(1) @Max(10)
     @NonNull
-    @NotEmpty
     @Column(name = "count_value", nullable = false, unique = true)
     private Integer count;
 
