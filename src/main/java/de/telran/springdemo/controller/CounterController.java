@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @RestController()
 @RequestMapping("/count")
@@ -25,7 +26,8 @@ public class CounterController {
             return new ResponseEntity<>(service.createOrGet(counter), HttpStatus.OK);
         } catch (ConstraintViolationException e) {
             //return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-            throw new IncorrectDataFormatException(e);
+            //throw new IncorrectDataFormatException(e);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getConstraintViolations().toString(), e);
         }
        /* } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

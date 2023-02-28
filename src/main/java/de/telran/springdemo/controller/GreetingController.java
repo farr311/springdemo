@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController()
 @RequestMapping("/greet")
 @SuppressWarnings("unused")
@@ -29,6 +31,17 @@ public class GreetingController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Greeting> getGreeting(@PathVariable long id) {
+        try {
+            return new ResponseEntity<>(service.get(id), HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/filter")
+    public ResponseEntity<List<Greeting>> getGreetingsList(@RequestBody GreetingFilter) {
         try {
             return new ResponseEntity<>(service.get(id), HttpStatus.OK);
         } catch (IllegalArgumentException e) {
