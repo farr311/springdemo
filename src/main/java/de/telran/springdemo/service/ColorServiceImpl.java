@@ -4,6 +4,7 @@ import de.telran.springdemo.entity.Color;
 import de.telran.springdemo.entity.Counter;
 import de.telran.springdemo.entity.RgbaValue;
 import de.telran.springdemo.repository.ColorRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +19,7 @@ public class ColorServiceImpl implements ColorService {
     RgbaValueService rgbaValueService;
 
     @Override
-    public long createOrGet(Color color) {
+    public long createOrGet(@Valid Color color) {
         long rgbaValueId = rgbaValueService.createOrGet(color.getRgbaValue());
         RgbaValue rgbaValue = rgbaValueService.get(rgbaValueId);
         color.setRgbaValue(rgbaValue);

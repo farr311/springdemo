@@ -3,6 +3,7 @@ package de.telran.springdemo.service;
 import de.telran.springdemo.entity.Counter;
 import de.telran.springdemo.entity.Greeting;
 import de.telran.springdemo.repository.GreetingRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,7 @@ public class GreetingServiceImpl implements GreetingService {
     @Autowired
     private CounterService counterService;
 
-    public long create(Greeting greeting) {
+    public long create(@Valid Greeting greeting) {
         long counterId = counterService.createOrGet(greeting.getCounter());
         Counter c = counterService.get(counterId);
         greeting.setCounter(c);

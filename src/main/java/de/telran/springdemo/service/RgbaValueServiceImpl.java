@@ -2,6 +2,7 @@ package de.telran.springdemo.service;
 
 import de.telran.springdemo.entity.RgbaValue;
 import de.telran.springdemo.repository.RgbaValueRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +14,7 @@ public class RgbaValueServiceImpl implements RgbaValueService {
     RgbaValueRepository repository;
 
     @Override
-    public long createOrGet(RgbaValue rgbaValue) {
+    public long createOrGet(@Valid RgbaValue rgbaValue) {
         return repository.save(rgbaValue).getId();
     }
 
