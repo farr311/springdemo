@@ -6,9 +6,10 @@ import lombok.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
+import java.util.Set;
 
 @Entity
-@Table(name = "count")
+@Table(name = "counter")
 @Getter
 @Setter
 @AllArgsConstructor
@@ -25,4 +26,7 @@ public class Counter {
     @NotEmpty
     @Column(name = "count_value", nullable = false, unique = true)
     private Integer count;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "counter")
+    private Set<Greeting> greetings;
 }

@@ -5,6 +5,7 @@ import lombok.*;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "greeting")
@@ -26,8 +27,10 @@ public class Greeting {
     @Column(name = "greeting_value", nullable = false, length = 280)
     private String value;
 
-
-    @ManyToOne
+    @NotNull
+    @NonNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "counter_id")
     private Counter counter;
 
     @ManyToOne
